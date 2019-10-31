@@ -1,5 +1,5 @@
 '''
-This file is to genreate 'README.txt' and 'info.txt' on execution
+This file is to genreate 'README.txt'
 '''
 
 
