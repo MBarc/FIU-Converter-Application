@@ -5,25 +5,11 @@ Author: Michael Barcelo
 """
 import smtplib
 
-def email(handler, message):
-    #Sends emails
-    server = smtplib.SMTP('smtpout.fiu.edu', 25) #establishing server
-
-    server.connect('smtpout.fiu.edu', 25) # connecting to server
-    
-    server.sendmail(
-      handler, # from address
-      handler, # to address
-      message) #message
-
-    server.quit() # deallocating system resources'
-
 def logger(message):
     #Logs error messages
-    error_log = open("ERROR.txt", 'w')
+    error_log = open("ERROR.txt", 'a')
     error_log.write(message)
     error_log.close()
-
 
 try:
     
@@ -54,9 +40,11 @@ try:
                 else:
                     raise Exception("[readme.txt Format Error]: The first 11 characters of line 4 should be 'share_with:'.")
                     
-             elif i ==4: #line 5
+             elif i == 4: #line 5
                 if line.startswith("scheme:"):
                     scheme = line[7:]
+                    if scheme.isspace():
+                        scheme = None
                 else:
                     raise Exception("[readme.txt Format Error]: The first 7 characters of line 5 should be 'scheme:'.")
 
@@ -65,13 +53,6 @@ except Exception as e:
     file_missing_error = "[Errno 2] No such file or directory: 'readme.txt'"    
 
     if e == file_missing_error: #if readme.txt is not within scope of information.py
-        logger("[Info.txt Directory error] 'readme.txt' is not within the same directory. This error log was created because the program did not know who to email.")
-    else: #email the error if it's not a 'readme.txt Directory Error'
-        try:
-            email(handler, e)
-        except Exception as e: # If the email is unable to send
-            e = str(e)
-            if "User Unknown" in e:
-                logger("[Info.txt Nonvalid Email Error]: Handler is not a valid email address. This error log was created because the program did not know who to email.")
-            elif "Domain of sender address does not exist" in e:
-                logger("[Info.txt Nonvalid Email Error]: Email is correctly written but the domain is not a proper '@fiu.edu' email.")
+        logger("[Info.txt Directory error]: 'readme.txt' is not within the same directory.")
+    else:
+        logger("[Info.txt Unknown Error]: " + e + " NOTE: Please let your Haivision System Administrator know if you received this error.")
