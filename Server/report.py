@@ -59,7 +59,6 @@ def addColor(name, hex_number, r, g, b):
 	xlwt.add_palette_colour(name, hex_number)
 	wb.set_colour_RGB(hex_number, r, g, b)
 
-
 wb = xlwt.Workbook()
 
 addColor("blue_title",0x21, 68, 114, 196)
