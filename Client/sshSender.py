@@ -3,6 +3,7 @@ This file is responsible for sending information to the Converting Server
 '''
 import os
 import time
+imort config #same directory 
 
 from information import logger
 
@@ -12,9 +13,7 @@ from information import feed
 from information import share_with
 from information import scheme
 
-
-
-server_address = 'xxx.xxx.xxx.xxx' #this ip address should be the server that is handling the actual conversion
+server_address = config.server['ip'] #this ip address should be the server that is handling the actual conversion
 
 filename = 'info.txt' # this variable should be the name of file that will be sent over SSH 
 
