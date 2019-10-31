@@ -1,8 +1,16 @@
+'''
+This is a daemon that will detect when new information gets shared with the Linux server.
+Runs once an hour.
+
+Note: Assumes a new info.txt will appear within every 7 years.
+'''
 import os
 import subprocess
 import time
 from daemon import runner
 import psutil #to check PID names
+import os, time, datetime, calendar
+from datetime import date
 
 class App():
 	def __init__(self):
@@ -17,20 +25,11 @@ class App():
 		try:
 			while True:
 
-				# put script here
-
-				'''
-				This script is responsible for listening when a new info.txt appears
-
-				Note: Assumes a new info.txt will appear within every 7 years
-				'''
-
-				import os, time, datetime, calendar
-				from datetime import date
 				info = os.getcwd() + "/info.txt"
 
 				try:
 					if os.path.exists(info):
+						
 						'''Creation information for info.txt'''
 						creation_time = time.ctime(os.path.getctime(info)) #parse data from this
 						day = creation_time[:-21]
@@ -89,7 +88,7 @@ class App():
 						else:
 							pass
 				except Exception as e:
-				print(e)
+					print(e)
 
 				time.sleep(60 * 60) #every hour
 		
