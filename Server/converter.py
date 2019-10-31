@@ -49,8 +49,8 @@ elif os.path.exists((mount_path + "/CCF3" + drive_path).rstrip()):
 try: #checks to see if complete_path got defined
 	complete_path
 except Exception as e: # if complete_path isn't defined
-	logger("[Converter Error]: Given path does not exist within CCF, CCF2, or CCF3. \n
-		Path given:" + drive_path + "\n")
+	logger("[Converter Error]: Given path does not exist within CCF, CCF2, or CCF3. \n" \
+		"Path given:" + drive_path + "\n")
 
 '''
 *-*-*-*-*-*-*-*-*-*-*-*-*-*
