@@ -9,6 +9,7 @@ readme.write("handler:\n")
 readme.write("file_path:\n")
 readme.write("feed_name:\n")
 readme.write("share_with:\n")
+readme.write("scheme:\n")
 
 readme.write('\n\n\n')
 
@@ -37,7 +38,10 @@ readme.write('\n')
 readme.write('share_with is the appropriate group that the videos should be shared with.\n')
 readme.write('\n')
 readme.write("                    share_with:CCF_HMP_Psych-Evaluations_Members\n")
-readme.write('')
+readme.write('\n')
+reamdme.write('scheme is the naming convention that should go before the title of the videos')
+readme.write('\n')
+readme.write('                    scheme:Naming_Convention_')
 
 
 readme.close()
