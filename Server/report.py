@@ -5,14 +5,14 @@ Author: Michael Barcelo
 '''
 import xlwt #to be able to create an excel file and populate it with information
 
-#from information import extensions
-#from information import extensions_count
-#from converter import start_time
-#from converter import end_time
-#from converter import duration
-#from converter import successful
-#from converter import failed
-#from converter import not_attempted
+from information import extensions
+from information import extensions_count
+from converter import start_time
+from converter import end_time
+from converter import duration
+from converter import successful
+from converter import failed
+from converter import not_attempted
 
 info = open("info.txt", "r")
 
