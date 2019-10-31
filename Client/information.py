@@ -53,6 +53,12 @@ try:
                     share_with = line[11:]
                 else:
                     raise Exception("[readme.txt Format Error]: The first 11 characters of line 4 should be 'share_with:'.")
+                    
+             elif i ==4: #line 5
+                if line.startswith("scheme:"):
+                    scheme = line[7:]
+                else:
+                    raise Exception("[readme.txt Format Error]: The first 7 characters of line 5 should be 'scheme:'.")
 
 except Exception as e:
     e = str(e)
