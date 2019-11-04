@@ -3,7 +3,7 @@ This file is responsible for sending information to the Converting Server
 '''
 import os
 import time
-imort config #same directory 
+import config #same directory 
 
 from information import logger
 
