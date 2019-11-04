@@ -15,7 +15,7 @@ import datetime #for email body
 date = datetime.datetime.today()
 date = date.month + "/" + date.day + "/" + date.year
 
-file_path = r"%s" % file_path #converts video to raw string format ; for email body
+file_path = r"%s" % file_path #converts string to raw string format ; for email body
 
 #Setup the MIME
 message = MIMEMultipart()
