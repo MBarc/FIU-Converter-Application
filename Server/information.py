@@ -13,8 +13,6 @@ for path, dirs, files in os.walk(complete_path):
    for filename in files:
        extensions[os.path.splitext(filename)[1].lower()] += 1
 
-print(extensions)
-
 extensions = []
 extensions_count = []
 for key,value in extensions.items():
