@@ -28,11 +28,13 @@ def logger(message):
 	error_log.write(message)
 	error_log.close()
 
-#Defines drive_path
+#Defines drive_path and scheme 
 info = open("info.txt", "r")
-for line in info:
+for i, line in info:
 	if "/" in line:
 		drive_path = line #directory to start searching
+	if i == 4:
+		scheme = line #naming convention to use
 
 mount_path = "/mnt" #where the CCF drives are mounted
 depository = "/newvideos/" #where the converted videos will be deposited 
@@ -71,7 +73,10 @@ for root, dirs, files in os.walk(complete_path, topdown=False):
 			return new_variable		
 					
 		video_path = root + "/" + name
-		video_destination = depository + splitter(name, ".", ".mp4")
+		if scheme is None:
+			video_destination = depository + splitter(name, ".", ".mp4")
+		else:
+			video_destination = scheme + depository + splitter(name, ".", ".mp4")
 
 		def empty_convert(video_input, video_output):
 			'''Default command to convert videos'''
