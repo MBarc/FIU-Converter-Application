@@ -11,6 +11,8 @@ from converter import handler #to know where to send the email to/from
 from converter import file_path #for email_body
 import datetime #for email body
 
+import config #same directory
+
 
 date = datetime.datetime.today()
 date = date.month + "/" + date.day + "/" + date.year
@@ -48,7 +50,7 @@ message.attach(payload) #Actually attaches the payload to the email
 
 #Create SMTP session for sending the mail
 session = smtplib.SMTP('smtpout.fiu.edu', 25) #use gmail with port
-session.connect('smtpout.fiu.edu', 25) # Connects to server
+session.connect(config.server['ip'], config.server['port']) # Connects to server
 session.starttls() #enable security
 text = message.as_string()
 session.sendmail(handler, handler, text) #Sends email ; sendmail(sender, receiver, message)
