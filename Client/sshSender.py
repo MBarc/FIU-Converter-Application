@@ -36,7 +36,7 @@ info_location = file_path + "/" + filename
 #copies the file to the Converting Server
 try:
     os.system('scp "%s" %s@%s:/haivisionconverterapp' % (info_location, username, server_address))
-    print('scp "%s" %s@%s:/haivisionconverte' % (info_location, username, server_address))
+    print('scp "%s" %s@%s:/haivisionconverterapp' % (info_location, username, server_address))
     time.sleep(5)
 except Exception as e: #if not able to copy the file
     if "Connection timed out" in e:
