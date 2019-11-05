@@ -6,65 +6,98 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time #for loading time between pages
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+import os
+
+from config import portal #same directory ; imports URL, username, and password
+
+from infomration import logger
+from information import feed
+
 feed = 'ABC Erica - Lab Archive' # feed to put videos to
+
+def logger(message):
+    '''Logs error messages'''
+    error_log = open("ERROR.txt", 'a')
+    error_log.write(message)
+    error_log.close()
+
+def click_on(element, element_type):
+    '''Waits, up to 10 seconds, to find element. Once it finds the element, it clicks on it.'''
+    if element_type == "id":
+        element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, element))).click()
+    if element_type == "css selector":
+        element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, element))).click()
+    if element_type == "xpath":
+        element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, element))).click()
+
+def search(css_selector):
+    '''Waits, up to 10 seconds, to find element. Once it finds the element, it types in it.'''
+    element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))).send_keys(feed, Keys.ENTER)
 
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 #Logging in + navigating to page
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-chromedriver = 'C:\\Users\\mbarcelo\\AppData\\Local\\Programs\\Python\\Python36\\chromedriver'
-driver = webdriver.Chrome(chromedriver)
 driver.get('https://ccfmedia.fiu.edu/login')
-
-username_textbox = driver.find_element_by_name('username')
-username_textbox.send_keys('mbarcelo')
-
-password_textbox = driver.find_element_by_name('password')
-password_textbox.send_keys('MichaelB1998!!!', Keys.ENTER)
 time.sleep(3)
 
-content_library = driver.find_element_by_id('nav-browser').click()
-time.sleep(.5)
+chromedriver = os.cwd() + '\\chromedriver'
+if not os.path.exists(chromedriver): #checks to see if handler has chromium installed
+    logger('[Error PublishFeed]: Chrome Driver not detected! Install the latest Chrome Driver from "chromedriver.chromium.org" and place the .EXE in the same directory.')
+    quit()
+    
+try:
+    driver = webdriver.Chrome(chromedriver)
+    driver.get(portal['url'])
+    time.sleep(3)
 
-sources = driver.find_element_by_id('showing-sections').click() #showing-sections = feeds tab
-time.sleep(4)
+    username_textbox = driver.find_element_by_name('username').send_keys(portal['username]')
+
+    password_textbox = driver.find_element_by_name('password').send_keys(portal['password'], Keys.ENTER)
+
+    content_library = click_on('nav-browser', "id")
+                                    
+    feeds_tab = click_on('showing-sections', "id")
+
+    search_for_feed = search('input.search-query.advanced-mode')
+
+    feed_thumbnail = click_on('i.site-icon-manage', "css selector")
 
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# Searching for a specific feed
+# Adding videos to feed
 #-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-#Navigating to feed
-input_feed = driver.find_element_by_css_selector('input.search-query.advanced-mode')
-input_feed.send_keys(feed, Keys.ENTER)
-
-time.sleep(4)
-driver.find_element_by_css_selector('i.site-icon-manage').click()
-
-#-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-# Adding video to feed
-#-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-
-time.sleep(4)
-
 lines = [line.rstrip('\n') for line in open('filenames.txt')]
 
+successful = []
+failed = []
+for name in lines:
 
-for i in lines:
-    search_all_videos = driver.find_element_by_css_selector('input.search-query.advanced-mode')
-    search_all_videos.send_keys(i, Keys.ENTER)
-
-    time.sleep(2)
+    search_all_videos = search('input.search-query.advanced-mode').send_keys(name, Keys.ENTER)
 
     try:
-        check_box = driver.find_element_by_xpath('//*[@id="media-thumbnail-list"]/li/div/div[1]/label/span')
-        check_box.click()
-        time.sleep(.5)
 
-        add_video = driver.find_element_by_css_selector('button#add-selected-to-section.btn-forward')
-        add_video.click()
+        check_box = click_on('//*[@id="media-thumbnail-list"]/li/div/div[1]/label/span', 'xpath')
 
-        time.sleep(.5)
-        search_all_videos.clear()
+        add_video = click_on('button#add-selected-to-section.btn-forward', 'css selector')
+
+        search_bar = driver.find_element_by_css_selector('input.search-query.advanced-mode').clear()
+
+        successful.append(name)
+
     except Exception as e:
-        print(i)
-        search_all_videos.clear()
+
+        failed.append(name)
+
+        logger(str(e))
+        
+        search_bar = driver.find_element_by_css_selector('input.search-query.advanced-mode').clear()
+
+driver.quit() #deallocating resources
