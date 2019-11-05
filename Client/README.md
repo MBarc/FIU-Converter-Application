@@ -1,4 +1,4 @@
-Stage 1:
+Stage 1: \n
         -Generates readme.txt that the user can fill out.
         
 Stage 2:
