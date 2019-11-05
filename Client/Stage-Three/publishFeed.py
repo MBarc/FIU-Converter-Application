@@ -15,10 +15,8 @@ import os
 
 from config import portal #same directory ; imports URL, username, and password
 
-from infomration import logger
+from information import logger
 from information import feed
-
-feed = 'ABC Erica - Lab Archive' # feed to put videos to
 
 def logger(message):
     '''Logs error messages'''
