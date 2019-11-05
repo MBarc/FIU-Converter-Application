@@ -28,6 +28,7 @@ message['Subject'] = 'Conversion Report %s' % date
 email_body = '''
 This email was sent to signal that the conversion process for %s has completed.
 Attached to this email is a detailed report containing information about the conversion process.
+You may start Stage 3.
 
 If you are encountering errors with the conversion process, please let your Haivision Systems Administrator know.
 
