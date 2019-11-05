@@ -37,8 +37,6 @@ def click_on(element, element_type):
     element = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.CSS_SELECTOR, css_selector))).send_keys(feed, Keys.ENTER)
     
-
-    
 chromedriver = os.getcwd() + '\\chromedriver'
 if not os.path.exists(chromedriver): #checks to see if handler has chromium installed
     logger('[Error PublishFeed]: Chrome Driver not detected! Install the latest Chrome Driver from "chromedriver.chromium.org" and place the .EXE in the same directory.')
