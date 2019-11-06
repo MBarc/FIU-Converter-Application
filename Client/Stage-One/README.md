@@ -2,7 +2,7 @@ handler:\
 file_path:\
 feed_name:\
 share_with:\
-scheme:\
+scheme:
 
 
 
