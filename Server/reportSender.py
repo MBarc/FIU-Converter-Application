@@ -50,9 +50,9 @@ payload.add_header('Content-Decomposition', 'attachment', filename=attach_file_n
 message.attach(payload) #Actually attaches the payload to the email
 
 #Create SMTP session for sending the mail
-session = smtplib.SMTP('smtpout.fiu.edu', 25) #use gmail with port
-session.connect(config.server['ip'], config.server['port']) # Connects to server
-session.starttls() #enable security
+session = smtplib.SMTP(config.smtp['ip'], config.smtp['port'])
+session.connect(config.smtp['ip'], config.smtp['port']) # Connects to server
+session.starttls() #enables security
 text = message.as_string()
 session.sendmail(handler, handler, text) #Sends email ; sendmail(sender, receiver, message)
 session.quit()
