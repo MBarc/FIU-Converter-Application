@@ -3,7 +3,8 @@ This file is responsible for sending information to the Converting Server
 '''
 import os
 import time
-import config #same directory 
+import config #same directory
+import subprocess
 
 from information import logger
 
@@ -19,28 +20,51 @@ filename = 'info.txt' # this variable should be the name of file that will be se
 
 #creating the file to ssh to the Converting Server
 info = open(filename, 'w')
+print(filename, "has been created! Populating now. . .")
 info.write(handler)
+print("Appended handler.")
 info.write(edited_path)
+print("Appended file path.")
 info.write(feed)
+print("Appended feed.")
 info.write(share_with)
+print("Appended group.")
 info.write(scheme)
+print("Appended scheme.")
 info.close()
 
+print("Finished appending information! Continuing. . .")
+time.sleep(3)
 #preps file_path for ssh usage
 
-count = os.getcwd().count('\\')        
+count = os.getcwd().count('\\')
+
 file_path = os.getcwd().replace('\\','/', count)
 
 info_location = file_path + "/" + filename
 
+
 #copies the file to the Converting Server
 try:
-    os.system('scp "%s" %s@%s:/haivisionconverterapp' % (info_location, handler, server_address))
-    print('scp "%s" %s@%s:/haivisionconverterapp' % (info_location, handler, server_address))
-    print("Connecting to server. . .")
-    time.sleep(5)
+
+    def username(variable,split_from):
+        '''grabs username from email '''
+        index = variable.rfind(split_from)
+        new_variable = variable[:index]
+        return new_variable
+
+    username = username(handler, "@")
+    command = 'scp "%s" %s@%s:/haivisionconverterapp' % (info_location, username, server_address)
+    print("Sending information to %s. You may be prompted to enter your password for %s." % (server_address, server_address))
+    test = subprocess.call(command, shell=True) #transfers file to server
+
+    if test == 1: #enters if statement if user is not on VPN
+        error = "[Error SSHSender]: User is not on VPN"
+        print(error)
+        logger(error)
+        time.sleep(2)
+        print("Exiting now. . .")
+        time.sleep(5)
+    
 except Exception as e: #if not able to copy the file
-    if "Connection timed out" in e:
-        logger("[Error SSHSender]: User is not on VPN")
-    else:
-        logger("[Error SSHSender]: " + e + " NOTE: Please email your Haivision System Administrator this error.")
+    logger("[Error SSHSender]: " + e + " NOTE: Please email your Haivision System Administrator this error.")
