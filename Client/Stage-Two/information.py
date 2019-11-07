@@ -39,8 +39,8 @@ try:
                     share_with = line[11:]
                 else:
                     raise Exception("[readme.txt Format Error]: The first 11 characters of line 4 should be 'share_with:'.")
-                    
-             elif i == 4: #line 5
+            
+            elif i == 4: #line 5
                 if line.startswith("scheme:"):
                     scheme = line[7:]
                     if scheme.isspace():
