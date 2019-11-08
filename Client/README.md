@@ -29,10 +29,10 @@ After all 3 .py files have been converted to .exe. Place them all into the same 
 
 ### Walkthrough
 
-**Step 1.)** Click on Stage-One.exe.
-**Step 2.)** Fill out information inside generated readme.txt.
-**Step 3.)** Click on Stage-Two.exe.
-**Step 4.)** Enter password.
-**Step 5.)** Wait until you receive an email from the Linux server that notifies you that the conversion process has completed.
-**Step 6.)** Click on Stage-Three.exe.
+**Step 1.)** Click on Stage-One.exe.\
+**Step 2.)** Fill out information inside generated readme.txt.\
+**Step 3.)** Click on Stage-Two.exe.\
+**Step 4.)** Enter password.\
+**Step 5.)** Wait until you receive an email from the Linux server that notifies you that the conversion process has completed.\
+**Step 6.)** Click on Stage-Three.exe.\
 **Step 7.)** Wait until process is completed.
