@@ -12,9 +12,9 @@
 
 
 For each stage, one .py file must be converted into .exe. Those specific .py files are listed below.\
-        Stage 1: readme.py\
-        Stage 2: sshSender.py\
-        Stage 3:
+        **Stage 1:** readme.py\
+        **Stage 2:** sshSender.py\
+        **Stage 3:**
        
 Note: Make sure to fill out the config.py before you create any .exe files!
         
