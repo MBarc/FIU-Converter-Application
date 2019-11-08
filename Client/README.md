@@ -27,7 +27,7 @@ For each stage, one .py file must be converted into .exe. Those specific .py fil
                 
 After all 3 .py files have been converted to .exe. Place them all into the same directory (perferably an empty directory).
 
-### Walkthrough
+# Walkthrough
 
 **Step 1.)** Click on Stage-One.exe.\
 **Step 2.)** Fill out information inside generated readme.txt.\
