@@ -16,7 +16,7 @@ For each stage, one .py file must be converted into .exe. Those specific .py fil
         **Stage 2:** sshSender.py\
         **Stage 3:**
        
-***Note: Make sure to fill out the config.py before you create any .exe files!***
+***Note: Make sure to fill out the config.py before you create any .exe files!***\
 ***Note: Please change the name of the .exe to reflect what stage it is. For example: readme.exe -> Stage-One.exe.***
         
 ## The files can be converted to .exe using Pyinstaller.
