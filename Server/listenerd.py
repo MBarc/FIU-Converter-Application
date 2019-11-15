@@ -88,7 +88,7 @@ class App():
 						else:
 							pass
 				except Exception as e:
-					print(e)
+					raise
 
 				time.sleep(60 * 60) #every hour
 		
