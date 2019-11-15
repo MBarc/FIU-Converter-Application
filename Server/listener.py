@@ -82,6 +82,6 @@ try:
 	else:
 		pass
 except Exception as e:
-	logger("[Lisenter ERROR]:", str(e))
+	logger("[Listener ERROR]:", str(e))
 
 		
