@@ -1,3 +1,4 @@
+![alt text] (https://digicdn.fiu.edu/v1/_assets/images/fiu-main-logo.png)
 # FIU-Converter-Application
 Haivision Converter Application
 
