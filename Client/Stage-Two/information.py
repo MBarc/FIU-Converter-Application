@@ -7,7 +7,7 @@ import smtplib
 
 def logger(message):
     #Logs error messages
-    error_log = open("ERROR.txt", 'a')
+    error_log = open("ERROR.txt", 'w')
     error_log.write(message)
     error_log.close()
 
